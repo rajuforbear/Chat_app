@@ -1,0 +1,22 @@
+{
+  "name": "socket_backend",
+  "version": "1.0.0",
+  "description": "'reeact native chat app'",
+  "main": "index.js",
+  "scripts": {
+    "test": "'testing"
+  },
+  "repository": {
+    "type": "git",
+    "url": "github"
+  },
+  "keywords": [
+    "github"
+  ],
+  "author": "raju",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.19.2",
+    "socket.io": "^4.7.5"
+  }
+}
