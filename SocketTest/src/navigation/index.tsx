@@ -7,6 +7,7 @@ export type navigation_params = {
   HOME_SCREEN: undefined;
   SPLASH_SCREEN: undefined;
   CHAT_SCREEN: undefined;
+  LOGIN_SCREEN: undefined;
 };
 const Root = () => {
   const dispatch = useDispatch();

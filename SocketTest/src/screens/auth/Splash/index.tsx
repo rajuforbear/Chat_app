@@ -11,6 +11,7 @@ import {
 import Contatcs from 'react-native-contacts';
 import {useDispatch} from 'react-redux';
 import {navigation_params} from '../../../navigation';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 type props = StackScreenProps<navigation_params, 'SPLASH_SCREEN'>;
 const Splash: React.FC<props> = ({navigation}) => {
   useEffect(() => {
@@ -48,22 +49,28 @@ const Splash: React.FC<props> = ({navigation}) => {
   const getContacts = () => {
     Contatcs.getAll()
       .then(contacts => {
+        // dispatch({
+        //   type: 'myChat/setContatcts',
+        //   payload: contacts,
+        // });
+        const filtered = contacts.filter(item => item.phoneNumbers.length > 0);
         dispatch({
           type: 'myChat/setContatcts',
-          payload: contacts,
+          payload: filtered,
         });
       })
-      .finally(() => {
-        navigation.reset({index: 0, routes: [{name: 'HOME_SCREEN'}]});
+      .finally(async () => {
+        const phone = await AsyncStorage.getItem('phone');
+        navigation.reset({
+          index: 0,
+          routes: [{name: phone ? 'HOME_SCREEN' : 'LOGIN_SCREEN'}],
+        });
       });
   };
   const [refreshing, setRefreshing] = useState(false);
   const onRefresh = () => {
     setRefreshing(true);
 
-    // Perform your refresh logic here, e.g., fetch new data from the server
-
-    // Simulate an asynchronous operation (e.g., fetching data) using setTimeout
     setTimeout(() => {
       setRefreshing(false); // Finish refreshing
     }, 5000); // Adjust the duration as needed
@@ -75,7 +82,7 @@ const Splash: React.FC<props> = ({navigation}) => {
         <RefreshControl
           refreshing={refreshing}
           onRefresh={onRefresh}
-          colors={['#9Bd35A', '#689F38', 'red', 'green', 'skyblue']}
+          colors={['#9Bd35A', '#689F38', 'red', 'green', 'skyblue', 'borwn']}
           progressBackgroundColor="#FFFFFF"
         />
       }>

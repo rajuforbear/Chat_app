@@ -1,3 +1,4 @@
+import Login from '../../screens/auth/Login';
 import Splash from '../../screens/auth/Splash';
 import Chat from '../../screens/main/Chat';
 import Home from '../../screens/main/Home';
@@ -6,6 +7,7 @@ export enum enums_screens {
   HOME_SCREEN = 'HOME_SCREEN',
   SPLASH_SCREEN = 'SPALSH_SCREEN',
   CHAT_SCREEN = 'CHAT_SCREEN',
+  LOGIN_SCREEN = 'LOGIN_SCREEN',
 }
 const getComponentByName = (screeName: string) => {
   switch (screeName) {
@@ -15,6 +17,8 @@ const getComponentByName = (screeName: string) => {
       return Home;
     case enums_screens.CHAT_SCREEN:
       return Chat;
+    case enums_screens.LOGIN_SCREEN:
+      return Login;
     default:
       return Splash;
   }
